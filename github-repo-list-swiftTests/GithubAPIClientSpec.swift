@@ -34,12 +34,12 @@ class GithubAPIClientSpec: QuickSpec {
             it("should get the proper repositories from Github") {
                 waitUntil(action: { (done) in
                     
-                    GithubAPIClient.getRepositories(with: { repos in
+                    GithubAPIClient.getRepositories(completionHandler: { repos in
                         
                         expect(repos).toNot(beNil())
-                        expect(repos.count).to(equal(2))
+                        expect(repos?.count).to(equal(2))
                         
-                        let repo1Name = repos[0]["full_name"] as? String
+                        let repo1Name = repos?[0]["full_name"] as? String
                         let repo2Name = repositoryArray[0]["full_name"] as? String
                         expect(repo1Name).to(equal(repo2Name))
                         
